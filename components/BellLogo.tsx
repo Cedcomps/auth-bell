@@ -3,7 +3,7 @@
 import React from 'react';
 
 const BellLogo: React.FC = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" width="269.553px" height="154.412px" viewBox="0 0 269.553 154.412" enable-background="new 0 0 269.553 154.412" >
+    <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" width="269.553px" height="154.412px" viewBox="0 0 269.553 154.412" enableBackground="new 0 0 269.553 154.412" >
     <pattern x="-116.157" y="326.883" width="69" height="69" patternUnits="userSpaceOnUse" id="Polka_Dot_Pattern" viewBox="2.125 -70.896 69 69" overflow="visible">
         <g>
             <polygon fill="none" points="71.125,-1.896 2.125,-1.896 2.125,-70.896 71.125,-70.896   "/>

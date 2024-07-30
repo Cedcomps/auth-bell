@@ -11,6 +11,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { ErrorBoundary } from '@/components/ErrorBoundary'
 import { useToast } from '@/components/ui/use-toast'
 import { Toaster } from '@/components/ui/toaster'
+import Image from "next/image"
+import BellLogo from '@/components/BellLogo'
+
 
 export default function Login() {
   const [email, setEmail] = useState('')
@@ -41,24 +44,33 @@ export default function Login() {
         title: 'Login Successful',
         description: 'You have been successfully logged in.',
       })
-      router.push('/accueil')
+      router.push('/protected')
     }
   }
 
   return (
     <ErrorBoundary>
-      <div className="container mx-auto flex items-center justify-center min-h-screen">
-        <Card className="max-w-md w-full">
-          <CardHeader>
-            <CardTitle>Login</CardTitle>
-            <CardDescription>Enter your email and password to login.</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <form onSubmit={handleLogin}>
-              <div className="grid gap-4">
-                <div className="grid gap-2">
-                  <Label htmlFor="email">Email</Label>
-                  <Input
+      <div className="w-full lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px]">
+      <div className="flex items-center justify-center py-12">
+        <div className="mx-auto grid w-[350px] gap-6">
+          <Link
+              href="/"
+              className="flex h-20 w-20 items-center justify-center gap-2 text-lg font-semibold text-primary-foreground md:text-base"
+            >
+              <BellLogo/>
+              <span className="sr-only">Bell</span>
+            </Link>
+          <div className="grid gap-2 text-center">
+            <h1 className="text-3xl font-bold">Login</h1>
+            <p className="text-balance text-muted-foreground">
+              Enter your email below to login to your account
+            </p>
+          </div>
+          <form onSubmit={handleLogin}>
+          <div className="grid gap-4">
+            <div className="grid gap-2">
+              <Label htmlFor="email">Email</Label>
+              <Input
                     type="email"
                     id="email"
                     value={email}
@@ -66,37 +78,52 @@ export default function Login() {
                     placeholder="your@email.com"
                     required
                   />
-                </div>
-                <div className="grid gap-2">
-                  <div className="flex items-center">
-                    <Label htmlFor="password">Password</Label>
-                    <Link href="/login/reset" className="ml-auto inline-block text-sm underline">
-                      Forgot your password?
-                    </Link>
-                  </div>
-                  <Input
+            </div>
+            <div className="grid gap-2">
+              <div className="flex items-center">
+                <Label htmlFor="password">Password</Label>
+                <Link
+                  href="/login/reset"
+                  className="ml-auto inline-block text-sm underline"
+                >
+                  Forgot your password?
+                </Link>
+              </div>
+              <Input
                     type="password"
                     id="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
                   />
-                </div>
-                {error && <p className="text-red-500 mb-4">{error}</p>}
-                <Button type="submit" className="w-full">
-                  Login
-                </Button>
-              </div>
-              <div className="mt-4 text-center text-sm">
-                Don&apos;t have an account?{" "}
-                <Link href="/signup" className="underline">
-                  Sign up
-                </Link>
-              </div>
-            </form>
-          </CardContent>
-        </Card>
+            </div>
+            {error && <p className="text-red-500 mb-4">{error}</p>}
+            <Button type="submit" className="w-full">
+              Login
+            </Button>
+            <Button variant="outline" className="w-full">
+              Login with Google
+            </Button>
+          </div>
+          </form>
+          <div className="mt-4 text-center text-sm">
+            Don&apos;t have an account?{" "}
+            <Link href="/signup" className="underline">
+              Sign up
+            </Link>
+          </div>
+        </div>
       </div>
+      <div className="hidden bg-muted lg:block">
+        <Image
+          src="https://business.bell.ca/web/SHOP/Responsive/content/img/img-banner_Pure_Fibre.jpg"
+          alt="Image"
+          width="1920"
+          height="1080"
+          className="h-full w-full object-cover dark:brightness-[0.2] opacity-50 dark:grayscale"
+        />
+      </div>
+    </div>
       <Toaster />
     </ErrorBoundary>
   )
