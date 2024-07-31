@@ -43,9 +43,7 @@ export default async function ProtectedPage() {
             <li><strong>Microsoft (Azure)</strong>: 1% - 3% of social logins <sup>[3]</sup></li>
             <li><strong>Twitter</strong>: 1% - 3% of social logins <sup>[1][3]</sup></li>
         </ol>
-
         <h2 className="text-xl font-bold mt-6 mb-2">Analysis</h2>
-
         <h3 className="text-lg font-semibold mt-4 mb-2">Top Tier</h3>
         <ul className="list-disc list-inside">
             <li><strong>Google</strong> accounts for approximately 73% to 75% of social logins, making it the most popular choice among users. This high adoption rate ensures that a significant portion of Bell Canada's customer base is likely already using Google, which can streamline the login process. <sup>[2][3]</sup>.</li>
