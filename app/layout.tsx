@@ -2,6 +2,7 @@ import { GeistSans } from "geist/font/sans";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster"
 import Analytics from "@/components/Analytics";
+import { Suspense } from "react";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -26,7 +27,9 @@ export default function RootLayout({
         </main>
         <Toaster />
       </body>
-      <Analytics />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Analytics />
+      </Suspense>
     </html>
   );
 }
