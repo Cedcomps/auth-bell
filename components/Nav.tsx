@@ -6,6 +6,7 @@ import { Search, ShoppingCart } from 'lucide-react';
 import BellLogo from '@/components/BellLogo';
 import AuthButton from './AuthButton';
 import { createClient } from '@/utils/supabase/server';
+import { buttonVariants } from './ui/button';
 
 const canInitSupabaseClient = () => {
     // This function is just for the interactive tutorial.
@@ -47,11 +48,17 @@ const Navbar: React.FC = () => {
           <ShoppingCart className="w-6 h-6 cursor-pointer" />
           {isSupabaseConnected && <AuthButton />}
             {!isSupabaseConnected && (
-              <div className="flex space-x-2">
-                <Link href="/login" className="hover:underline">Login</Link>
-                <span>/</span>
-                <Link href="/signup" className="hover:underline">Sign Up</Link>
-              </div>
+              <><Link
+              href="/login"
+              className={buttonVariants({ variant: "outline" })}
+            >
+              Login
+            </Link><Link
+              href="/signup"
+              className={buttonVariants({})}
+            >
+                Signup
+              </Link></>
             )}
         </div>
       </div>
