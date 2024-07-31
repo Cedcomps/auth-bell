@@ -8,6 +8,10 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { useToast } from '@/components/ui/use-toast'
 import { Toaster } from '@/components/ui/toaster'
+import { FaGoogle } from "react-icons/fa";
+import BellLogo from '@/components/BellLogo'
+import { ErrorBoundary } from '@/components/ErrorBoundary'
+import Link from 'next/link'
 
 export default function SignUp() {
   const [email, setEmail] = useState('')
@@ -24,7 +28,6 @@ export default function SignUp() {
       email,
       password,
     })
-
     if (error) {
       setError(error.message)
       toast({
@@ -41,10 +44,33 @@ export default function SignUp() {
       router.push('/login?message=Check your email to complete the sign-up process')
     }
   }
+  const handleGoogleLogin = async () => {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: `${window.location.origin}/auth/callback`,
+      },
+    })
 
+    if (error) {
+      toast({
+        title: 'Google Login Failed',
+        description: error.message,
+        variant: 'destructive',
+      })
+    }
+  }
   return (
+    <ErrorBoundary>
     <div className="container mx-auto flex items-center justify-center min-h-screen">
       <div className="max-w-md w-full">
+        <Link
+            href="/"
+            className="flex h-20 w-20 items-center justify-center gap-2 text-lg font-semibold text-primary-foreground md:text-base"
+          >
+            <BellLogo/>
+            <span className="sr-only">Bell</span>
+          </Link>
         <h1 className="text-3xl font-bold mb-6">Sign Up</h1>
         <form onSubmit={handleSignUp}>
           <div className="mb-4">
@@ -72,8 +98,14 @@ export default function SignUp() {
             Sign Up
           </Button>
         </form>
+        <div className="grid gap-2 py-4">
+        <Button variant="outline" className="w-full" onClick={handleGoogleLogin}>
+        <FaGoogle />&nbsp; Sign up with Google 
+            </Button>
+        </div>
       </div>
       <Toaster />
     </div>
+    </ErrorBoundary>
   )
 }

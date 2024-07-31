@@ -7,12 +7,12 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import Link from 'next/link'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { ErrorBoundary } from '@/components/ErrorBoundary'
 import { useToast } from '@/components/ui/use-toast'
 import { Toaster } from '@/components/ui/toaster'
 import Image from "next/image"
 import BellLogo from '@/components/BellLogo'
+import { FaGoogle } from "react-icons/fa";
 
 
 export default function Login() {
@@ -30,7 +30,7 @@ export default function Login() {
       email,
       password,
     })
-
+    
     if (error) {
       setError(error.message)
       toast({
@@ -47,7 +47,22 @@ export default function Login() {
       router.push('/protected')
     }
   }
+  const handleGoogleLogin = async () => {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: `${window.location.origin}/auth/callback`,
+      },
+    })
 
+    if (error) {
+      toast({
+        title: 'Google Login Failed',
+        description: error.message,
+        variant: 'destructive',
+      })
+    }
+  }
   return (
     <ErrorBoundary>
       <div className="w-full lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px]">
@@ -101,11 +116,11 @@ export default function Login() {
             <Button type="submit" className="w-full">
               Login
             </Button>
-            <Button variant="outline" className="w-full">
-              Login with Google
-            </Button>
           </div>
           </form>
+          <Button variant="outline" className="w-full" onClick={handleGoogleLogin}>
+          <FaGoogle />&nbsp; Login with Google
+            </Button>
           <div className="mt-4 text-center text-sm">
             Don&apos;t have an account?{" "}
             <Link href="/signup" className="underline">
