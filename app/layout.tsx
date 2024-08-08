@@ -3,6 +3,7 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/toaster"
 import Analytics from "@/components/Analytics";
 import { Suspense } from "react";
+import { UserProvider } from '@auth0/nextjs-auth0/client';
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -21,15 +22,17 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={GeistSans.className}>
+      <UserProvider>
       <body className="bg-background text-foreground">
         <main className="min-h-screen flex flex-col items-center">
           {children}
         </main>
         <Toaster />
       </body>
-      <Suspense fallback={<div>Loading...</div>}>
+      </UserProvider>
+      {/* <Suspense fallback={<div>Loading...</div>}>
         <Analytics />
-      </Suspense>
+      </Suspense> */}
     </html>
   );
 }
