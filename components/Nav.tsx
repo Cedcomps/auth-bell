@@ -39,7 +39,7 @@ const Navbar: React.FC = () => {
             <Link href="/home-phone" className="hover:underline">Home phone</Link>
             <Link href="/bundles" className="hover:underline">Bundles</Link>
             <Link href="/promotions" className="hover:underline">Promotions</Link>
-            <Link href="/support" className="hover:underline">Support</Link>
+            <Link href="/protected" className="hover:underline">Support</Link>
           </div>
         </div>
         <div className="flex items-center space-x-4">
